@@ -83,4 +83,4 @@ const BandProvider = props => {
     )
 }
 
-export default BandProvider 
+export default BandProvider

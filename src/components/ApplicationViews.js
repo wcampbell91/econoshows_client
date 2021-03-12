@@ -6,37 +6,33 @@ import VenueProvider from "./venues/VenueProvider"
 
 import ShowProvider from "./shows/ShowProvider"
 
+import GenreProvider from "./GenreProvider"
+
+import Home from "./home/Home"
 import  Login  from "./auth/Login"
 import  Register from "./auth/Register"
+import RegisterBand from "./auth/RegisterBand"
+
+import NavBar from "./nav/NavBar"
 
 export const ApplicationViews = () => {
     return <>
         <main style={{
             margin: "5rem 2rem",
-            backgroundColor: "lightgoldenrodyellow"
         }}>
-            <BandProvider>
-                <VenueProvider>
-                    <ShowProvider>
-                        <Route exact path="/login" render={props => <Login {...props} />} />
-                        <Route exact path="/register" render={props => <Register {...props} />} />
-                    </ShowProvider>
-                </VenueProvider>
-            </BandProvider>
-            {/* <GameProvider>
-                <Route exact path="/" render={props => <GameList {...props} />} />
-                <Route exact path="/games/new" render={props => <GameForm {...props} />} />
-                <Route exact path="/games/:gameId(\d+)/edit" render={props => <GameForm {...props} />} />
-                <EventProvider>
-                    <Route exact path="/events"render={props => <EventList {...props}/>} />
-                    <Route exact path="/events/new"render={props => <EventForm {...props}/>} />
-                </EventProvider>
-            </GameProvider>
-            <ProfileProvider>
-                <Route exact path="/profile">
-                    <Profile />
-                </Route>
-            </ProfileProvider> */}
+            <GenreProvider>
+                <BandProvider>
+                    <VenueProvider>
+                        <ShowProvider>
+                            <Route render={props => <NavBar {...props} />} />
+                            <Route exact path="/" render={props => <Home {...props} />} />
+                            <Route exact path="/login" render={props => <Login {...props} />} />
+                            <Route exact path="/register" render={props => <Register {...props} />} />
+                            <Route exact path="/registerBand" render={props => <RegisterBand {...props} />} />
+                        </ShowProvider>
+                    </VenueProvider>
+                </BandProvider>
+            </GenreProvider>
         </main>
     </>
 }

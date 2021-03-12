@@ -27,7 +27,7 @@ const BandProvider = props => {
         }
 
     const registerBand = band => {
-        return fetch("http://localhost:8000/bands", {
+        return fetch("http://localhost:8000/register_band", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -35,14 +35,6 @@ const BandProvider = props => {
             },
             body: JSON.stringify(band)
         })
-        .then(res => res.json())
-        // .then(res => {
-        //     if ("token" in res) {
-        //         localStorage.setItem("token", res.token)
-        //         localStorage.setItem("user_id", res.id)
-        //         props.history.push("/")
-        //     }
-        // })
     }
 
     const updateBand = band => {

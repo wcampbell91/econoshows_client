@@ -15,7 +15,6 @@ const Home = props => {
 
     return (
         <div className="home-container">
-            <h1>EconoShows</h1>
             <div>
                 { showCards }
             </div>

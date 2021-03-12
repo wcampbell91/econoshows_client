@@ -7,7 +7,6 @@ import  Register from "./auth/Register"
 
 export const EconoShows = () => (
     <>
-        <Route render={NavBar} />
-        <Route render={props => <ApplicationViews {...props} />} />
+            <Route render={props => <ApplicationViews {...props} />} />
     </>
 )

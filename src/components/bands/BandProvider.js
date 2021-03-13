@@ -6,8 +6,8 @@ const BandProvider = props => {
     const [bands, setBands] = useState([])
     const [band, setBand] = useState({})
 
-    const getBand = (id) => {
-        return fetch(`http://localhost:8000/bands/${id}`, {
+    const getBand = (bandId) => {
+        return fetch(`http://localhost:8000/bands/${bandId}`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("token")}`
             }

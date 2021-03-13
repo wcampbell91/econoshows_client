@@ -27,7 +27,7 @@ const VenueProvider = props => {
     }
 
     const registerVenue = venue => {
-        return fetch("http://localhost:8000/venues", {
+        return fetch("http://localhost:8000/register_venue", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +35,6 @@ const VenueProvider = props => {
             },
             body: JSON.stringify(venue)
         })
-        .then(res => res.json())
     }
 
     const updateVenue = venue => {

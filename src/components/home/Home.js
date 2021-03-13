@@ -14,7 +14,7 @@ const Home = props => {
     const showCards = shows ? shows.map((show) => <HomeShowCard {...props} key={show.id} show={show} />) : ''
 
     return (
-        <div className="home-container">
+        <div className="container home-container">
             <div>
                 { showCards }
             </div>

@@ -29,6 +29,7 @@ const SingleBand = props => {
                     </ListGroup>
                 </Col>
                 <Col>
+                    <h4 style={{textAlign: "center"}}>Shows</h4>
                     {bandShowCards}
                 </Col>
             </Row>

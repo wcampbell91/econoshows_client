@@ -5,6 +5,7 @@ import BandProvider from "./bands/BandProvider"
 import SingleBand from "./bands/SingleBand"
 
 import VenueProvider from "./venues/VenueProvider"
+import SingleVenue from "./venues/SingleVenue"
 
 import ShowProvider from "./shows/ShowProvider"
 
@@ -34,6 +35,7 @@ export const ApplicationViews = () => {
                             <Route exact path="/registerBand" render={props => <RegisterBand {...props} />} />
                             <Route exact path="/registerVenue" render={props => <RegisterVenue {...props} />} />
                             <Route exact path="/bands/:bandId(\d+)" render={props => <SingleBand {...props} />} />
+                            <Route exact path="/venues/:venueId(\d+)" render={props => <SingleVenue {...props} />} />
                         </ShowProvider>
                     </VenueProvider>
                 </BandProvider>

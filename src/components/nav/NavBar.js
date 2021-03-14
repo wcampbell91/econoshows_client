@@ -1,20 +1,19 @@
-import React, { useContext, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
 import "./NavBar.scss"
 import { Navbar, Nav, Button } from "react-bootstrap"
-import { BandContext } from "../bands/BandProvider"
-import { VenueContext } from "../venues/VenueProvider"
+// import { BandContext } from "../bands/BandProvider"
+// import { VenueContext } from "../venues/VenueProvider"
 
 
 const NavBar = props => {
-    const { getBand, band } = useContext(BandContext)
-    const { getVenue, venue } = useContext(VenueContext)
+    // const { getBand, band } = useContext(BandContext)
+    // const { getVenue, venue } = useContext(VenueContext)
 
-    const userId = localStorage.getItem("user_id")
+    // const userId = localStorage.getItem("user_id")
 
-    useEffect(() => {
-        userId ? getBand(userId) : getVenue(userId)
-    }, [])
+    // useEffect(() => {
+    //     userId ? getBand(userId) : getVenue(userId)
+    // }, [])
 
     return (
         <Navbar fixed="top" className="Navbar" bg="dark" variant="dark" expand="lg">
@@ -27,10 +26,12 @@ const NavBar = props => {
                     <Nav.Link href="/shows">Shows</Nav.Link>
                     { (localStorage.getItem("token") !== null) 
                     ?
-                        <Button variant="primary"
+                        <Button variant="secondary"
                         onClick={() => {
                             localStorage.removeItem("token")
                             localStorage.removeItem("user_id")
+                            localStorage.removeItem("band_id")
+                            localStorage.removeItem("venue_id")
                             props.history.push({ pathname: "/"})
                         }}>Logout</Button>
                     : 

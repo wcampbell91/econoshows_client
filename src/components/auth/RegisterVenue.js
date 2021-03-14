@@ -55,7 +55,7 @@ const RegisterVenue = props => {
                         if ("token" in res) {
                             localStorage.setItem("token", res.token)
                             localStorage.setItem("user_id", res.id)
-                            localStorage.setItem("profile_id", res.venue_id)
+                            localStorage.setItem("venue_id", res.venue_id)
                             props.history.push(`/venues/${res.venue_id}`)
                         }
                     })

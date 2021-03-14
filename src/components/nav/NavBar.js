@@ -26,7 +26,7 @@ const NavBar = props => {
                     <Nav.Link href="/shows">Shows</Nav.Link>
                     { (localStorage.getItem("token") !== null) 
                     ?
-                        <Button variant="primary"
+                        <Button variant="secondary"
                         onClick={() => {
                             localStorage.removeItem("token")
                             localStorage.removeItem("user_id")

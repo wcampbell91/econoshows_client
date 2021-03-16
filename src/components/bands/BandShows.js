@@ -1,16 +1,19 @@
 import React from "react"
+import { Card } from "react-bootstrap"
 
 const BandShows = props => {
     const { show } = props  
+
+    console.log(show) 
     return (
-            <div class="card">
-                <img src="..." class="card-img-top" alt="..." />
-                <div class="card-body">
-                    <h5 class="card-title">{show.show.title}</h5>
-                    <p class="card-text">{show.show.date}</p>
-                    <p className="card-text">{show.show.venue}</p>
-                </div>
-            </div>
+            <Card>
+                <Card.Img variant="top" src={show.photos ? show.photos : ''} />
+                <Card.Body>
+                    <Card.Title>{show.title}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">{show.date}</Card.Subtitle>
+                    {show && show.venue ? show.venue.map((venue) => <Card.Text>{venue.venue.venue_name}</Card.Text>) : ''}
+                </Card.Body>
+            </Card>
     )
 }
 

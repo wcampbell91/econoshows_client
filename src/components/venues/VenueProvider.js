@@ -3,8 +3,8 @@ import React, { useState } from "react"
 export const VenueContext = React.createContext()
 
 const VenueProvider = props => {
-    const [ venue, setVenue ] = useState({})
     const [ venues, setVenues ] = useState([])
+    const [ venue, setVenue ] = useState({})
 
     const getVenue = id => {
         return fetch(`http://localhost:8000/venues/${id}`, {
@@ -22,7 +22,7 @@ const VenueProvider = props => {
                 "Authorization": `Token ${localStorage.getItem("token")}`
             }
         })
-        .then(res => res.json)
+        .then(res => res.json())
         .then(setVenues)
     }
 

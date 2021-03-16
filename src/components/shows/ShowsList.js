@@ -13,7 +13,7 @@ const ShowsList = props => {
         <Container>
             <CardDeck>
                 {shows ? shows.map((show) => {
-                    return <Card>
+                    return <Card key={show.id}>
                                 <Card.Img variant="top" src={show && show.poster ? show.poster : ''} />
                                 <Card.Body>
                                     <Card.Title>{show.title}</Card.Title>

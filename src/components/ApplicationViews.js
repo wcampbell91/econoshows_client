@@ -2,15 +2,16 @@ import React from "react"
 import { Route } from "react-router-dom"
 
 import BandProvider from "./bands/BandProvider"
-import SingleBand from "./bands/SingleBand"
 import BandsList from "./bands/BandsList"
+import SingleBand from "./bands/SingleBand"
 
 import VenueProvider from "./venues/VenueProvider"
-import SingleVenue from "./venues/SingleVenue"
 import VenuesList from "./venues/VenuesList"
+import SingleVenue from "./venues/SingleVenue"
 
 import ShowProvider from "./shows/ShowProvider"
 import ShowsList from "./shows/ShowsList"
+import SingleShow from "./shows/SingleShow"
 
 import GenreProvider from "./GenreProvider"
 
@@ -42,6 +43,7 @@ export const ApplicationViews = () => {
                             <Route exact path="/bands" render={props => <BandsList {...props} />} />
                             <Route exact path="/venues" render={props => <VenuesList {...props} />} />
                             <Route exact path="/shows" render={props => <ShowsList {...props} />} />
+                            <Route exact path="/shows/:showId(\d+)" render={props => <SingleShow {...props} />} />
                         </ShowProvider> 
                     </VenueProvider>
                 </BandProvider>

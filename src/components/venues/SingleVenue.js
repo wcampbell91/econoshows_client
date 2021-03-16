@@ -6,14 +6,14 @@ import VenueShows from "./VenueShows"
 const SingleVenue = props => {
 
     const { venue, getVenue } = useContext(VenueContext)
-
-    const venueId = localStorage.getItem("venue_id")
+    
+    const { venueId } = props.match.params
 
     useEffect(() => {
         getVenue(venueId)
     }, [])
 
-    const venueShowCards = venue && venue.shows ? venue.shows.map((show) => <VenueShows key={show.id} show={show} />) : ''
+    const venueShowCards = venue && venue.shows ? venue.shows.map((show) => <VenueShows key={show.id} show={show.show} />) : ''
     
     return(
         <Container>

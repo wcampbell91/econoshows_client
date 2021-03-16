@@ -20,24 +20,25 @@ const NavBar = props => {
             <Navbar.Brand href="/">EconoShows</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                        <Nav.Link className="center-link" href="/bands">Bands</Nav.Link>
+                        <Nav.Link className="center-link" href="/venues">Venues</Nav.Link>
+                        <Nav.Link className="center-link" href="/shows">Shows</Nav.Link>
+                </Nav>
                 <Nav className="ml-auto">
-                    <Nav.Link href="/bands">Bands</Nav.Link>
-                    <Nav.Link href="/venues">Venues</Nav.Link>
-                    <Nav.Link href="/shows">Shows</Nav.Link>
                     { (localStorage.getItem("token") !== null) 
                     ?
-                        <Button variant="secondary"
+                        <Nav.Link className="ml-auto"
                         onClick={() => {
                             localStorage.removeItem("token")
                             localStorage.removeItem("user_id")
                             localStorage.removeItem("band_id")
                             localStorage.removeItem("venue_id")
                             props.history.push({ pathname: "/"})
-                        }}>Logout</Button>
+                        }}>Logout</Nav.Link>
                     : 
                         <>
-                        <Nav.Link href="/login">Login</Nav.Link>
-                        <Nav.Link href="/register">Sign up!</Nav.Link>
+                        <Nav.Link href="/login">Login / Register</Nav.Link>
                         </>
                     }  
                 </Nav> 

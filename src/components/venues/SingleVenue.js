@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { Container, Row, Col, ListGroup } from "react-bootstrap"
+import { Container, Row, Col, ListGroup, CardDeck, Button } from "react-bootstrap"
 import { VenueContext } from "./VenueProvider"
 import VenueShows from "./VenueShows"
 
@@ -8,6 +8,7 @@ const SingleVenue = props => {
     const { venue, getVenue } = useContext(VenueContext)
     
     const { venueId } = props.match.params
+    const authVenueId = localStorage.getItem("venue_id")
 
     useEffect(() => {
         getVenue(venueId)
@@ -31,7 +32,10 @@ const SingleVenue = props => {
                 </Col>
                 <Col>
                     <h4 style={{textAlign: "center"}}>Shows</h4>
-                    {venueShowCards}
+                    <CardDeck>
+                        {venueShowCards}
+                    </CardDeck>
+                    {authVenueId === venueId ? <Button variant="primary" href="/addShow">Add Show</Button> : ""}
                 </Col>
             </Row>
         </Container>

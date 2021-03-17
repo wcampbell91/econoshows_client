@@ -12,6 +12,7 @@ import SingleVenue from "./venues/SingleVenue"
 import ShowProvider from "./shows/ShowProvider"
 import ShowsList from "./shows/ShowsList"
 import SingleShow from "./shows/SingleShow"
+import ShowForm from "./shows/ShowForm"
 
 import GenreProvider from "./GenreProvider"
 
@@ -44,6 +45,8 @@ export const ApplicationViews = () => {
                             <Route exact path="/venues" render={props => <VenuesList {...props} />} />
                             <Route exact path="/shows" render={props => <ShowsList {...props} />} />
                             <Route exact path="/shows/:showId(\d+)" render={props => <SingleShow {...props} />} />
+                            <Route exact path="/addShow" render={props => <ShowForm {...props} />} />
+                            <Route exact path="/editShow/:showId(\d+)" render={props => <ShowForm {...props} />} />
                         </ShowProvider> 
                     </VenueProvider>
                 </BandProvider>

@@ -6,14 +6,8 @@ import { Navbar, Nav, Button } from "react-bootstrap"
 
 
 const NavBar = props => {
-    // const { getBand, band } = useContext(BandContext)
-    // const { getVenue, venue } = useContext(VenueContext)
-
-    // const userId = localStorage.getItem("user_id")
-
-    // useEffect(() => {
-    //     userId ? getBand(userId) : getVenue(userId)
-    // }, [])
+    const bandId = localStorage.getItem("band_id")
+    const venueId = localStorage.getItem("venue_id")
 
     return (
         <Navbar fixed="top" className="Navbar" bg="dark" variant="dark" expand="lg">
@@ -24,6 +18,7 @@ const NavBar = props => {
                         <Nav.Link className="center-link" href="/bands">Bands</Nav.Link>
                         <Nav.Link className="center-link" href="/venues">Venues</Nav.Link>
                         <Nav.Link className="center-link" href="/shows">Shows</Nav.Link>
+                        
                 </Nav>
                 <Nav className="ml-auto">
                     { (localStorage.getItem("token") !== null) 
@@ -36,11 +31,12 @@ const NavBar = props => {
                             localStorage.removeItem("venue_id")
                             props.history.push({ pathname: "/"})
                         }}>Logout</Nav.Link>
-                    : 
-                        <>
+                    :
                         <Nav.Link href="/login">Login / Register</Nav.Link>
-                        </>
                     }  
+                    {bandId !== null
+                    ? <Nav.Link href={`/bands/${bandId}`}>My Profile</Nav.Link>
+                    : venueId ? <Nav.Link href={`/venues/${venueId}`}>MyProfile</Nav.Link> : ""}
                 </Nav> 
             </Navbar.Collapse>
         </Navbar>

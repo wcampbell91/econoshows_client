@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { Container, Row, Col, ListGroup, CardDeck } from "react-bootstrap"
+import { Container, Row, Col, ListGroup, CardDeck, Button } from "react-bootstrap"
 import { BandContext } from "./BandProvider"
 import BandShows from "./BandShows"
 
@@ -8,6 +8,8 @@ const SingleBand = props => {
     const { band, getBand } = useContext(BandContext)
 
     const { bandId } =  props.match.params
+
+    const authBandId = localStorage.getItem("band_id")
 
     useEffect(() => {
         getBand(bandId)
@@ -33,6 +35,7 @@ const SingleBand = props => {
                     <CardDeck>
                         {bandShowCards}
                     </CardDeck>
+                    { authBandId === bandId ? <Button className="mt-2" style={{textAlign: "center"}} variant="primary" href="/addShow">Add A Show</Button> : ""}
                 </Col>
             </Row>
         </Container>

@@ -11,7 +11,9 @@ const ShowsList = props => {
 
     return(
         <Container className="justify-content-center">
-            <Button variant="primary" className="mb-2" style={{textAlign: "center"}}href="/addShow">Add Show</Button>
+            {(localStorage.getItem("token") !== null) 
+            ? <Button variant="primary" className="mb-2" style={{textAlign: "center"}}href="/addShow">Add Show</Button>
+            : ""}
             <CardDeck>
                 {shows ? shows.map((show) => {
                     return <Card key={show.id}>

@@ -12,7 +12,7 @@ const SingleShow = props => {
 
     useEffect(() => {
         getShow(showId)
-    })
+    }, [])
 
     const showBandCards = show && show.bands ? show.bands.map((band) => <ShowBands key={band.id} band={band.band} />) : ''
 

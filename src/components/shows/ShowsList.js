@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react"
 import  { ShowContext } from "./ShowProvider"
-import { Container, Card, CardDeck } from "react-bootstrap"
+import { Container, Card, CardDeck, Button } from "react-bootstrap"
 
 const ShowsList = props => {
     const { shows, getShows } = useContext(ShowContext)
@@ -10,7 +10,8 @@ const ShowsList = props => {
     }, [])
 
     return(
-        <Container>
+        <Container className="justify-content-center">
+            <Button variant="primary" className="mb-2" style={{textAlign: "center"}}href="/addShow">Add Show</Button>
             <CardDeck>
                 {shows ? shows.map((show) => {
                     return <Card key={show.id}>

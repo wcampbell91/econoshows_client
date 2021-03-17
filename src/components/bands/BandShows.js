@@ -4,7 +4,6 @@ import { Card } from "react-bootstrap"
 const BandShows = props => {
     const { show } = props  
 
-    console.log(show) 
     return (
             <Card>
                 <Card.Img variant="top" src={show.photos ? show.photos : ''} />

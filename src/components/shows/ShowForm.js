@@ -7,7 +7,7 @@ import OpenerComponent from "./OpenerComponent"
 import { Form, Container, Col, Button } from "react-bootstrap"
 
 const ShowForm = props => {
-    const { createShow, getShow, show } = useContext(ShowContext)
+    const { createShow, getShow, show, updateShow } = useContext(ShowContext)
     const { getVenues, venues } = useContext(VenueContext)
     const { getBands, bands } = useContext(BandContext)
     const { getGenres, Genres } = useContext(GenreContext)
@@ -29,23 +29,17 @@ const ShowForm = props => {
 
     const userId = localStorage.getItem("user_id")
 
-    useEffect(() => {
-        getVenues()
-        getBands()
-        getGenres()
-    }, [])
+    const { showId } = props.match.params
 
     useEffect(() => {
         // If show is being edited 
         if ("showId" in props.match.params) {
-            getShow(props.match.params.showId)
-            .then(show => {
-                let bandsList = []
-
-                for(let i=0; i < show.bands; i++){
-                    bandsList += show.bands[i]
-                }
-
+            getShow(showId)               
+                const bandsList = []
+                show.bands.map((band) => {
+                    return bandsList.push(band.band.id)
+                })
+                console.log(bandsList)
                 setCurrentShow({
                     author: userId,
                     title: show.title,
@@ -54,14 +48,20 @@ const ShowForm = props => {
                     show_time: show.show_time,
                     cover: show.cover,
                     date: show.date,
-                    genre: show.genre,
+                    genre: show.genre ? show.genre : 1,
                     poster: show.poster,
-                    venue: show.venue,
+                    venue: show.venue.id,
                     bands: bandsList
                 })
-            })
         }
     }, [props.match.params.showId])
+
+    useEffect(() => {
+        getVenues()
+        getBands()
+        getGenres()
+    }, [])
+
 
     const handleChange = e => {
         const newShowState = Object.assign({}, currentShow)
@@ -84,25 +84,26 @@ const ShowForm = props => {
         setCurrentShow(newShowState)
     }
 
+
     return (
         <Container>
             <Form className="col-6 offset-3">
                 <Form.Group controlId="title">
                     <Form.Label>Title</Form.Label>
-                    <Form.Control name="title" type="text" onChange={handleChange}/>
+                    <Form.Control defaultValue={currentShow.title} name="title" type="text" onChange={handleChange}/>
                 </Form.Group>
 
                 <Form.Row>
                     <Col>
                         <Form.Group  controlId="door_time">
                             <Form.Label>Door Time</Form.Label>
-                            <Form.Control name="door_time" placeholder="eg. 8:00 PM" type="text" onChange={handleChange}/>
+                            <Form.Control defaultValue={currentShow.door_time} name="door_time" placeholder="eg. 8:00 PM" type="text" onChange={handleChange}/>
                         </Form.Group>
                     </Col>
                     <Col>
                         <Form.Group controlId="show_time">
                             <Form.Label>Show Time</Form.Label>
-                            <Form.Control name="show_time" placeholder="eg. 8:00 PM" type="text" onChange={handleChange}/>
+                            <Form.Control defaultValue={currentShow.show_time} name="show_time" placeholder="eg. 8:00 PM" type="text" onChange={handleChange}/>
                         </Form.Group>
                     </Col>
                 </Form.Row>
@@ -110,25 +111,26 @@ const ShowForm = props => {
                     <Col>
                         <Form.Group controlId="cover">
                             <Form.Label>Cover</Form.Label>
-                            <Form.Control name="cover" placeholder="eg. $5" type="text" onChange={handleChange}/>
+                            <Form.Control defaultValue={currentShow.cover} name="cover" placeholder="eg. $5" type="text" onChange={handleChange}/>
                         </Form.Group>
                     </Col>
                     <Col>
                         <Form.Group controlId="date">
                             <Form.Label>Date</Form.Label>
-                            <Form.Control name="date" type="date" onChange={handleChange}/>
+                            <Form.Control defaultValue={currentShow.date} name="date" type="date" onChange={handleChange}/>
                         </Form.Group>
                     </Col>
                 </Form.Row>
                 <Form.Group>
                     <Form.Label>Venue</Form.Label>
                     <Form.Control name="venue" as="select" onChange={handleChange}>
+                        {currentShow && currentShow.venue ? <option value={currentShow.venue.id}>{currentShow.venue.venue_name}</option> : ""}
                         {venues ? venues.map((venue) => <option value={venue.id}>{venue.venue_name}</option>): ""}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="description">
                     <Form.Label>Show Description</Form.Label>
-                    <Form.Control name="description" as="textarea" rows={5} onChange={handleChange}/>
+                    <Form.Control defaultValue={currentShow.description} name="description" as="textarea" rows={5} onChange={handleChange}/>
                 </Form.Group>
                 <h3>Bands on Bill:</h3>
                     <Form.Row>
@@ -173,7 +175,24 @@ const ShowForm = props => {
                 </Form.Row>
                 {
                     ("showId" in props.match.params)
-                    ? <Button className="justify-content-center" variant="primary">Update Show</Button>
+                    ? <Button className="justify-content-center" variant="primary" onClick={e => {
+                        const updatedShow = {
+                            id: showId,
+                            author: parseInt(userId),
+                            title: currentShow.title,
+                            description: currentShow.description,
+                            door_time: currentShow.door_time,
+                            show_time: currentShow.show_time,
+                            cover: currentShow.cover,
+                            date: currentShow.date,
+                            genre: parseInt(currentShow.genre),
+                            // poster: "",
+                            venue: parseInt(currentShow.venue),
+                            bands: currentShow.bands
+                        }
+                        updateShow(updatedShow)
+                        .then(() => props.history.push("/shows"))
+                    }}>Update Show</Button>
                     : <Button variant="primary" onClick={e => {
                         e.preventDefault();
                         const newShow = {

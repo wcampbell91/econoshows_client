@@ -1,6 +1,6 @@
 import React, { useContext, useEffect} from "react"
 import {ShowContext} from "./ShowProvider"
-import {Container, Row, Col, ListGroup, CardDeck} from "react-bootstrap"
+import {Container, Row, Col, ListGroup, CardDeck, Button} from "react-bootstrap"
 import BandsList from "../bands/BandsList"
 import ShowBands from "./ShowBands"
 
@@ -8,7 +8,8 @@ const SingleShow = props => {
     const {show, getShow} = useContext(ShowContext)
 
     const { showId } = props.match.params
-    console.log(showId)
+
+    const userId = parseInt(localStorage.getItem("user_id"))
 
     useEffect(() => {
         getShow(showId)
@@ -38,6 +39,8 @@ const SingleShow = props => {
                     </CardDeck>
                 </Col>
             </Row>
+            {
+            show && show.author && (userId === show.author.id ) ? <Button className="text-center mt-2" variant="primary" href={`/editShow/${show.id}`}>Update Show</Button> : ""}
         </Container>
     )
 }

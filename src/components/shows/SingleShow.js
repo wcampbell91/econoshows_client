@@ -1,6 +1,6 @@
 import React, { useContext, useEffect} from "react"
 import {ShowContext} from "./ShowProvider"
-import {Container, Row, Col, ListGroup, CardDeck} from "react-bootstrap"
+import {Container, Row, Col, ListGroup, CardDeck, Button} from "react-bootstrap"
 import BandsList from "../bands/BandsList"
 import ShowBands from "./ShowBands"
 
@@ -8,13 +8,14 @@ const SingleShow = props => {
     const {show, getShow} = useContext(ShowContext)
 
     const { showId } = props.match.params
-    console.log(showId)
+
+    const userId = parseInt(localStorage.getItem("user_id"))
 
     useEffect(() => {
         getShow(showId)
     }, [])
 
-    const showBandCards = show && show.bands ? show.bands.map((band) => <ShowBands key={band.id} band={band.band} />) : ''
+    const showBandCards = show && show.bands ? show.bands.map((band) => <ShowBands key={band.id} band={band} />) : ''
 
     return (
         <Container>
@@ -24,7 +25,7 @@ const SingleShow = props => {
                     <p>{show.description}</p>
                     <ListGroup>
                         <ListGroup.Item>When: {show.date}</ListGroup.Item>
-                        {show && show.venue ? show.venue.map((venue) => <ListGroup.Item>Venue: {venue.venue.venue_name}</ListGroup.Item> ) : ''}
+                        {show && show.venue ?  <ListGroup.Item>Venue: {show.venue.venue_name}</ListGroup.Item> : ''}
                         <ListGroup.Item>Doors @ {show.door_time}</ListGroup.Item>
                         <ListGroup.Item>Show @ {show.show_time}</ListGroup.Item>
                         <ListGroup.Item>Cover: {show.cover}</ListGroup.Item>
@@ -38,6 +39,8 @@ const SingleShow = props => {
                     </CardDeck>
                 </Col>
             </Row>
+            {
+            show && show.author && (userId === show.author.id ) ? <Button className="text-center mt-2" variant="primary" href={`/editShow/${show.id}`}>Update Show</Button> : ""}
         </Container>
     )
 }

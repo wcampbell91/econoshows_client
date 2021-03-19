@@ -15,7 +15,10 @@ const ShowProvider = props => {
     const getShow = id => {
         return fetch(`http://localhost:8000/shows/${id}`)
                     .then(res => res.json())
-                    .then(setShow)
+                    .then((res) => {
+                        setShow(res)
+                        return res
+                    })
     }
 
     const createShow = show => {
@@ -33,6 +36,7 @@ const ShowProvider = props => {
     }
 
     const updateShow = show => {
+        console.log(show)
         return fetch(`http://localhost:8000/shows/${show.id}`, {
             method: "PUT",
             headers: {
@@ -41,7 +45,6 @@ const ShowProvider = props => {
             },
             body: JSON.stringify(show)
         })
-        .then(getShow)
     }
 
     const deleteShow = id => {

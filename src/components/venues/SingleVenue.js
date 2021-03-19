@@ -14,7 +14,7 @@ const SingleVenue = props => {
         getVenue(venueId)
     }, [])
 
-    const venueShowCards = venue && venue.shows ? venue.shows.map((show) => <VenueShows key={show.id} show={show.show} />) : ''
+    const venueShowCards = venue && venue.shows ? venue.shows.map((show) => <VenueShows key={show.id} show={show} />) : ''
     
     return(
         <Container>

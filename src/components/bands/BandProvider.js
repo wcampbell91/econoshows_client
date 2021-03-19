@@ -8,9 +8,6 @@ const BandProvider = props => {
 
     const getBand = (bandId) => {
         return fetch(`http://localhost:8000/bands/${bandId}`, {
-            headers: {
-                "Authorization": `Token ${localStorage.getItem("token")}`
-            }
         })
         .then(res => res.json())
         .then(setBand)
@@ -18,9 +15,6 @@ const BandProvider = props => {
 
     const getBands = () => {
         return fetch("http://localhost:8000/bands", {
-            headers: {
-                "Authorization": `Token ${localStorage.getItem("token")}`
-            }
         })
         .then(res => res.json())
         .then(setBands)

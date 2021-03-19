@@ -15,7 +15,7 @@ const SingleBand = props => {
         getBand(bandId)
     }, [])
 
-    const bandShowCards = band && band.shows ? band.shows.map((show) => <BandShows key={show.id} show={show.show} />) : ''
+    const bandShowCards = band && band.shows ? band.shows.map((show) => <BandShows key={show.id} show={show} />) : ''
     
     return(
         <Container>

@@ -15,7 +15,7 @@ const SingleShow = props => {
         getShow(showId)
     }, [])
 
-    const showBandCards = show && show.bands ? show.bands.map((band) => <ShowBands key={band.id} band={band.band} />) : ''
+    const showBandCards = show && show.bands ? show.bands.map((band) => <ShowBands key={band.id} band={band} />) : ''
 
     return (
         <Container>
@@ -25,7 +25,7 @@ const SingleShow = props => {
                     <p>{show.description}</p>
                     <ListGroup>
                         <ListGroup.Item>When: {show.date}</ListGroup.Item>
-                        {show && show.venue ? show.venue.map((venue) => <ListGroup.Item>Venue: {venue.venue.venue_name}</ListGroup.Item> ) : ''}
+                        {show && show.venue ?  <ListGroup.Item>Venue: {show.venue.venue_name}</ListGroup.Item> : ''}
                         <ListGroup.Item>Doors @ {show.door_time}</ListGroup.Item>
                         <ListGroup.Item>Show @ {show.show_time}</ListGroup.Item>
                         <ListGroup.Item>Cover: {show.cover}</ListGroup.Item>

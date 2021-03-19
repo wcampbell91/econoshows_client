@@ -8,9 +8,6 @@ const VenueProvider = props => {
 
     const getVenue = id => {
         return fetch(`http://localhost:8000/venues/${id}`, {
-            headers: {
-                "Authorization": `Token ${localStorage.getItem("token")}`
-            }
         })
         .then(res => res.json())
         .then(setVenue)
@@ -18,9 +15,6 @@ const VenueProvider = props => {
 
     const getVenues = () => {
         return fetch("http://localhost:8000/venues", {
-            headers: {
-                "Authorization": `Token ${localStorage.getItem("token")}`
-            }
         })
         .then(res => res.json())
         .then(setVenues)

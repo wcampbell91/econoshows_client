@@ -43,7 +43,7 @@ const ShowForm = props => {
                         cover: newShow.cover,
                         date: newShow.date,
                         poster: newShow.poster,
-                        venue: newShow.venue[0].venue.id,
+                        venue: newShow.venue,
                         bands: newShow.bands
                     })  
                 })       
@@ -65,7 +65,7 @@ const ShowForm = props => {
                 if (checkeds[i].value !== "0") {
                     console.log(checkeds)
                     const band = checkeds[i].value
-                    checkedBands.push({band: JSON.parse(band)})
+                    checkedBands.push(JSON.parse(band))
                 }
             }
             newShowState["bands"] = checkedBands
@@ -114,7 +114,7 @@ const ShowForm = props => {
                 <Form.Group>
                     <Form.Label>Venue</Form.Label>
                     <Form.Control name="venue" as="select" selected={currentShow.venue.id} onChange={handleChange}>
-                        {/* {currentShow && currentShow.venue ? <option value={currentShow.venue}>{currentShow.venue.venue_name}</option> : ""} */}
+                        {currentShow && currentShow.venue ? <option value={currentShow.venue.id}>{currentShow.venue.venue_name}</option> : ""}
                         {venues ? venues.map((venue) => <option value={venue.id}>{venue.venue_name}</option>): ""}
                     </Form.Control>
                 </Form.Group>
@@ -128,17 +128,17 @@ const ShowForm = props => {
                             <Form.Group>
                                 <Form.Label>1.</Form.Label>
                                 <Form.Control name="bands" as="select" onChange={handleChange}>
-                                    {"showId" in props.match.params  && currentShow.bands[0] ? <option value={JSON.stringify(currentShow.bands[0].band)}>{currentShow.bands[0].band.band_name}</option> : <option value="0" name="nope">-</option>}
-                                    <option value="0" name="nope">-</option>
+                                    {"showId" in props.match.params  && currentShow.bands[0] ? <option value={JSON.stringify(currentShow.bands[0])}>{currentShow.bands[0].band_name}</option> : <option value="0" name="nope">-</option>}
                                     {bands ? bands.map((band) => <option value={JSON.stringify(band)}>{band.band_name}</option>): ""}
-                                </Form.Control>v
+                                    <option value="0" name="nope">-</option>
+                                </Form.Control>
                             </Form.Group>
                         </Col>
                         <Col>
                             <Form.Group>
                                 <Form.Label>2.</Form.Label>
                                 <Form.Control name="bands" as="select" onChange={handleChange}>
-                                    {"showId" in props.match.params && currentShow.bands[1] ? <option value={JSON.stringify(currentShow.bands[1].band)}>{currentShow.bands[1].band.band_name}</option> : <option value="0" name="nope">-</option>}
+                                    {"showId" in props.match.params && currentShow.bands[1] ? <option value={JSON.stringify(currentShow.bands[1])}>{currentShow.bands[1].band_name}</option> : <option value="0" name="nope">-</option>}
                                     <option value="0" name="nope">-</option>
                                     {bands ? bands.map((band) => <option value={JSON.stringify(band)}>{band.band_name}</option>): ""}
                                 </Form.Control>
@@ -150,7 +150,7 @@ const ShowForm = props => {
                         <Form.Group>
                             <Form.Label>3.</Form.Label>
                             <Form.Control name="bands" as="select" onChange={handleChange}>
-                                {"showId" in props.match.params && currentShow.bands[2] ? <option value={JSON.stringify(currentShow.bands[2].band)}>{currentShow.bands[2].band.band_name}</option> : <option value="0" name="nope">-</option>}
+                                {"showId" in props.match.params && currentShow.bands[2] ? <option value={JSON.stringify(currentShow.bands[2])}>{currentShow.bands[2].band_name}</option> : <option value="0" name="nope">-</option>}
                                 <option value="0" name="nope">-</option>
                                 {bands ? bands.map((band) => <option value={JSON.stringify(band)}>{band.band_name}</option>): ""}
                             </Form.Control>
@@ -160,7 +160,7 @@ const ShowForm = props => {
                         <Form.Group>
                             <Form.Label>4.</Form.Label>
                             <Form.Control name="bands" as="select" onChange={handleChange}>
-                                {"showId" in props.match.params && currentShow.bands[3] ? <option value={JSON.stringify(show.bands[3].band)}>{show.bands[3].band.band_name}</option> : <option value="0" name="nope">-</option>}
+                                {"showId" in props.match.params && currentShow.bands[3] ? <option value={JSON.stringify(currentShow.bands[3])}>{currentShow.bands[3].band_name}</option> : <option value="0" name="nope">-</option>}
                                 <option value="0" name="nope">-</option>
                                 {bands ? bands.map((band) => <option value={JSON.stringify(band)}>{band.band_name}</option>): ""}
                             </Form.Control>
@@ -172,9 +172,7 @@ const ShowForm = props => {
                     ? <Button className="justify-content-center" variant="primary" onClick={e => {
                         e.preventDefault();
 
-                        const newBands = currentShow.bands.map((band) => band.band.id)
-                        console.log(newBands)
-
+                        const newBands = currentShow.bands.map((band) => band.id)
 
                         
                         const updatedShow = {
@@ -187,7 +185,7 @@ const ShowForm = props => {
                             cover: currentShow.cover,
                             date: currentShow.date,
                             // poster: "",
-                            venue: parseInt(currentShow.venue),
+                            venue: currentShow.venue.id,
                             bands: newBands
                         }
                         updateShow(updatedShow)
@@ -196,7 +194,7 @@ const ShowForm = props => {
                     : <Button variant="primary" onClick={e => {
                         e.preventDefault();
 
-                        const newBands = currentShow.bands.map((band) => band.band.id)
+                        const newBands = currentShow.bands.map((band) => band.id)
 
                         const newShow = {
                             author: parseInt(userId),
@@ -207,7 +205,7 @@ const ShowForm = props => {
                             cover: currentShow.cover,
                             date: currentShow.date,
                             // poster: "",
-                            venue: parseInt(currentShow.venue),
+                            venue: currentShow.venue.id,
                             bands: newBands
                         }
                         createShow(newShow)

@@ -13,6 +13,7 @@ import ShowProvider from "./shows/ShowProvider"
 import ShowsList from "./shows/ShowsList"
 import SingleShow from "./shows/SingleShow"
 import ShowForm from "./shows/ShowForm"
+import UpdateShow from "./shows/UpdateShow"
 
 import GenreProvider from "./GenreProvider"
 

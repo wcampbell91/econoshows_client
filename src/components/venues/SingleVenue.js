@@ -39,6 +39,7 @@ const SingleVenue = props => {
                     {authVenueId === venueId ? <Button variant="primary" href="/addShow">Add Show</Button> : ""}
                 </Col>
             </Row>
+            { authVenueId === venueId ? <Button variant="danger" href={`/deleteVenue/${venueId}`}>Delete Account</Button> : ""}
         </Container>
     )
 }

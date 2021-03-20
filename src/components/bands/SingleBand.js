@@ -18,7 +18,8 @@ const SingleBand = props => {
     const bandShowCards = band && band.shows ? band.shows.map((show) => <BandShows key={show.id} show={show} />) : ''
     
     return(
-        <Container>
+        <Container className="justify-content-center">
+            { authBandId === bandId ? <Button className="mr-auto" variant="primary" href={`/editBand/${bandId}`}>Update Profile</Button> : ""}
             <Row>
                 <Col>
                     <h3>{band.band_name}</h3>

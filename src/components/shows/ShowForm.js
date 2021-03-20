@@ -57,9 +57,9 @@ const ShowForm = props => {
         
         const newShowState = Object.assign({}, currentShow)
         const checkedBands = []
-        if(e.target.name !== "bands") {
+        if(e.target.name !== "bands" && e.target.name !== "venue") {
             newShowState[e.target.name] = e.target.value
-        } else {
+        } else if (e.target.name === "bands") {
             const checkeds = document.getElementsByName("bands")
             for (let i=0; i < checkeds.length; i++) {
                 if (checkeds[i].value !== "0") {
@@ -70,6 +70,9 @@ const ShowForm = props => {
             }
             newShowState["bands"] = checkedBands
             console.log(bands)
+        } else if (e.target.name === "venue") {
+            const newVenue = JSON.parse(e.target.value)
+            newShowState["venue"] = newVenue
         }
         setCurrentShow(newShowState)
     }
@@ -114,8 +117,8 @@ const ShowForm = props => {
                 <Form.Group>
                     <Form.Label>Venue</Form.Label>
                     <Form.Control name="venue" as="select" selected={currentShow.venue.id} onChange={handleChange}>
-                        {currentShow && currentShow.venue ? <option value={currentShow.venue.id}>{currentShow.venue.venue_name}</option> : ""}
-                        {venues ? venues.map((venue) => <option value={venue.id}>{venue.venue_name}</option>): ""}
+                        {currentShow && currentShow.venue ? <option value={currentShow.venue}>{currentShow.venue.venue_name}</option> : ""}
+                        {venues ? venues.map((venue) => <option value={JSON.stringify(venue)}>{venue.venue_name}</option>): ""}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="description">
@@ -189,7 +192,7 @@ const ShowForm = props => {
                             bands: newBands
                         }
                         updateShow(updatedShow)
-                        .then(() => props.history.push("/shows"))
+                        .then(() => props.history.push(`/shows/${showId}`))
                     }}>Update Show</Button>
                     : <Button variant="primary" onClick={e => {
                         e.preventDefault();

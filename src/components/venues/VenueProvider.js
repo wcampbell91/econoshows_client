@@ -10,7 +10,10 @@ const VenueProvider = props => {
         return fetch(`http://localhost:8000/venues/${id}`, {
         })
         .then(res => res.json())
-        .then(setVenue)
+        .then(res => {
+            setVenue(res)
+            return res
+        })
     }
 
     const getVenues = () => {

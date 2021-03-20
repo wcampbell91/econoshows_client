@@ -48,14 +48,14 @@ const BandForm = props => {
 
 
     const handleChange = e => {        
-        const newShowState = Object.assign({}, currentBand)
+        const newBandState = Object.assign({}, currentBand)
         if (e.target.name !== "genre") {
-            newShowState[e.target.name] = e.target.value
+            newBandState[e.target.name] = e.target.value
         } else {
             const genre = JSON.parse(e.target.value)
-            newShowState["genre"] = genre
+            newBandState["genre"] = genre
         }
-        setCurrentBand(newShowState)
+        setCurrentBand(newBandState)
     }
 
     return (

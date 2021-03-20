@@ -18,6 +18,7 @@ const SingleVenue = props => {
     
     return(
         <Container>
+            {authVenueId === venueId ? <Button variant="primary" href={`/editVenue/${venueId}`}>Update Profile</Button> : ""}
             <Row>
                 <Col>
                     <h3>{venue.venue_name}</h3>

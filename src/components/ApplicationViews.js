@@ -5,11 +5,13 @@ import BandProvider from "./bands/BandProvider"
 import BandsList from "./bands/BandsList"
 import SingleBand from "./bands/SingleBand"
 import BandForm from "./bands/BandForm"
+import DeleteBand from "./bands/DeleteBand"
 
 import VenueProvider from "./venues/VenueProvider"
 import VenuesList from "./venues/VenuesList"
 import SingleVenue from "./venues/SingleVenue"
 import VenueForm from "./venues/VenueForm"
+import DeleteVenue from "./venues/DeleteVenue"
 
 import ShowProvider from "./shows/ShowProvider"
 import ShowsList from "./shows/ShowsList"
@@ -45,11 +47,13 @@ export const ApplicationViews = () => {
                             <Route exact path="/registerVenue" render={props => <RegisterVenue {...props} />} />
                             <Route exact path="/venues/:venueId(\d+)" render={props => <SingleVenue {...props} />} />
                             <Route exact path="/editVenue/:venueId(\d+)" render={props => <VenueForm {...props} />} />
+                            <Route exact path="/deleteVenue/:venueId(\d+)" render={props => <DeleteVenue {...props} />} />
 
                             <Route exact path="/bands" render={props => <BandsList {...props} />} />
                             <Route exact path="/registerBand" render={props => <RegisterBand {...props} />} />
                             <Route exact path="/bands/:bandId(\d+)" render={props => <SingleBand {...props} />} />
                             <Route exact path="/editBand/:bandId(\d+)" render={props => <BandForm {...props} />} />
+                            <Route exact path="/deleteBand/:bandId(\d+)" render={props => <DeleteBand {...props} />} />
 
                             <Route exact path="/shows" render={props => <ShowsList {...props} />} />
                             <Route exact path="/shows/:showId(\d+)" render={props => <SingleShow {...props} />} />

@@ -48,7 +48,10 @@ const VenueProvider = props => {
 
     const deleteVenue = id => {
         return fetch(`http://localhost:8000/venues/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("token")}`
+            }
         })
         .then(getVenues)
     }

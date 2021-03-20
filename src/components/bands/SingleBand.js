@@ -5,7 +5,7 @@ import BandShows from "./BandShows"
 
 const SingleBand = props => {
 
-    const { band, getBand } = useContext(BandContext)
+    const { band, getBand, deleteBand } = useContext(BandContext)
 
     const { bandId } =  props.match.params
 
@@ -39,6 +39,7 @@ const SingleBand = props => {
                     { authBandId === bandId ? <Button className="mt-2" style={{textAlign: "center"}} variant="primary" href="/addShow">Add A Show</Button> : ""}
                 </Col>
             </Row>
+            { authBandId === bandId ? <Button variant="danger" href={`/deleteBand/${bandId}`}>Delete Account</Button> : ""}
         </Container>
     )
 }

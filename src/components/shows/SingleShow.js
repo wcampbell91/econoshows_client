@@ -39,8 +39,9 @@ const SingleShow = props => {
                     </CardDeck>
                 </Col>
             </Row>
-            {
-            show && show.author && (userId === show.author.id ) ? <Button className="text-center mt-2" variant="primary" href={`/editShow/${show.id}`}>Update Show</Button> : ""}
+            { show && show.author && (userId === show.author.id ) ? <Button className="text-center mt-2" variant="primary" href={`/editShow/${show.id}`}>Update Show</Button> : ""}
+            { show && show.author && (userId === show.author.id ) ? <Button variant="danger mt-2 ml-2" href={`/deleteShow/${showId}`}>Delete Show</Button> : ""}
+
         </Container>
     )
 }

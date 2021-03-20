@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from "react"
 import { Container, Row, Col, ListGroup, CardDeck, Button } from "react-bootstrap"
 import { BandContext } from "./BandProvider"
 import BandShows from "./BandShows"
+import moment from "moment"
+import { string } from "prop-types"
 
 const SingleBand = props => {
 
@@ -15,7 +17,12 @@ const SingleBand = props => {
         getBand(bandId)
     }, [])
 
-    const bandShowCards = band && band.shows ? band.shows.map((show) => <BandShows key={show.id} show={show} />) : ''
+    const today = moment().format("YYYY-MM-DD")
+    console.log(today)
+    const showsByDate = band && band.shows ? band.shows.filter((show) => show.date > today) : "" 
+    const sortedShowsByDate = showsByDate ? showsByDate.sort((a,b) => a.date - b.date) : ""
+    console.log(sortedShowsByDate)
+    const bandShowCards = showsByDate ? showsByDate.map((show) => <BandShows key={show.id} show={show} />) : ''
     
     return(
         <Container className="justify-content-center">

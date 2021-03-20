@@ -49,7 +49,10 @@ const ShowProvider = props => {
 
     const deleteShow = id => {
         return fetch(`http://localhost:8000/shows/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("token")}`
+            }
         })
         .then(getShows)
     }

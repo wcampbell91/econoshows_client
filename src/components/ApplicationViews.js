@@ -4,6 +4,7 @@ import { Route } from "react-router-dom"
 import BandProvider from "./bands/BandProvider"
 import BandsList from "./bands/BandsList"
 import SingleBand from "./bands/SingleBand"
+import BandForm from "./bands/BandForm"
 
 import VenueProvider from "./venues/VenueProvider"
 import VenuesList from "./venues/VenuesList"
@@ -40,9 +41,10 @@ export const ApplicationViews = () => {
                             <Route exact path="/register" render={props => <Register {...props} />} />
                             <Route exact path="/registerBand" render={props => <RegisterBand {...props} />} />
                             <Route exact path="/registerVenue" render={props => <RegisterVenue {...props} />} />
-                            <Route exact path="/bands/:bandId(\d+)" render={props => <SingleBand {...props} />} />
                             <Route exact path="/venues/:venueId(\d+)" render={props => <SingleVenue {...props} />} />
                             <Route exact path="/bands" render={props => <BandsList {...props} />} />
+                            <Route exact path="/bands/:bandId(\d+)" render={props => <SingleBand {...props} />} />
+                            <Route exact path="/editBand/:bandId(\d+)" render={props => <BandForm {...props} />} />
                             <Route exact path="/venues" render={props => <VenuesList {...props} />} />
                             <Route exact path="/shows" render={props => <ShowsList {...props} />} />
                             <Route exact path="/shows/:showId(\d+)" render={props => <SingleShow {...props} />} />

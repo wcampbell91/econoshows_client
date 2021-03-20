@@ -10,7 +10,10 @@ const BandProvider = props => {
         return fetch(`http://localhost:8000/bands/${bandId}`, {
         })
         .then(res => res.json())
-        .then(setBand)
+        .then((res) => {
+            setBand(res)
+            return res
+        })
     }
 
     const getBands = () => {
@@ -40,7 +43,6 @@ const BandProvider = props => {
             },
             body: JSON.stringify(band)
         })
-        .then(getBand)
     }
 
     const deleteBand = id => {

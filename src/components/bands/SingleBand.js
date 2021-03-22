@@ -3,7 +3,6 @@ import { Container, Row, Col, ListGroup, CardDeck, Button } from "react-bootstra
 import { BandContext } from "./BandProvider"
 import BandShows from "./BandShows"
 import moment from "moment"
-import { string } from "prop-types"
 
 const SingleBand = props => {
 

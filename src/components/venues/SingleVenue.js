@@ -16,11 +16,10 @@ const SingleVenue = props => {
     }, [])
 
     const today = moment().format("YYYY-MM-DD")
-    console.log(today)
-    const showsByDate = venue && venue.shows ? venue.shows.filter((show) => show.date > today) : "" 
-    console.log(showsByDate)
+    const shows = venue && venue.shows ? venue.shows.filter(show => show.date > today) : ""
+    const shows_by_date = shows ? shows.sort((a,b) => (new Date(a.date)) - (new Date(b.date))) : ""
 
-    const venueShowCards = showsByDate ? showsByDate.map((show) => <VenueShows key={show.id} show={show} />) : ''
+    const venueShowCards = shows_by_date ? shows_by_date.map((show) => <VenueShows key={show.id} show={show} />) : ''
     
     return(
         <Container>

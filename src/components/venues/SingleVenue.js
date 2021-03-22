@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react"
 import { Container, Row, Col, ListGroup, CardDeck, Button } from "react-bootstrap"
 import { VenueContext } from "./VenueProvider"
 import VenueShows from "./VenueShows"
+import moment from "moment"
 
 const SingleVenue = props => {
 
@@ -14,7 +15,11 @@ const SingleVenue = props => {
         getVenue(venueId)
     }, [])
 
-    const venueShowCards = venue && venue.shows ? venue.shows.map((show) => <VenueShows key={show.id} show={show} />) : ''
+    const today = moment().format("YYYY-MM-DD")
+    const shows = venue && venue.shows ? venue.shows.filter(show => show.date > today) : ""
+    const shows_by_date = shows ? shows.sort((a,b) => (new Date(a.date)) - (new Date(b.date))) : ""
+
+    const venueShowCards = shows_by_date ? shows_by_date.map((show) => <VenueShows key={show.id} show={show} />) : ''
     
     return(
         <Container>

@@ -18,12 +18,10 @@ const SingleBand = props => {
     }, [])
 
     const today = moment().format("YYYY-MM-DD")
-    console.log(today)
-    const showsByDate = band && band.shows ? band.shows.filter((show) => show.date > today) : "" 
-    const sortedShowsByDate = showsByDate ? showsByDate.sort((a,b) => a.date - b.date) : ""
-    console.log(sortedShowsByDate)
-    const bandShowCards = showsByDate ? showsByDate.map((show) => <BandShows key={show.id} show={show} />) : ''
-    
+    const shows = band && band.shows ? band.shows.filter(show => show.date > today) : ""
+    const shows_by_date = shows ? shows.sort((a,b) => (new Date(a.date)) - (new Date(b.date))) : ""
+    const bandShowCards = shows_by_date ? shows_by_date.map((show) => <BandShows key={show.id} show={show} />) : ""
+
     return(
         <Container className="justify-content-center">
             { authBandId === bandId ? <Button className="mr-auto" variant="primary" href={`/editBand/${bandId}`}>Update Profile</Button> : ""}

@@ -32,7 +32,7 @@ const SingleBand = props => {
                     <ListGroup>
                         <ListGroup.Item>Lineup: {band.lineup}</ListGroup.Item>
                         <ListGroup.Item>Genre: {band && band.genre ? band.genre.name : ''}</ListGroup.Item>
-                        <ListGroup.Item>Contact: {band && band.user ? band.user.email : ''}</ListGroup.Item>
+                        <ListGroup.Item>Contact: {localStorage.getItem("token") && band.user ? band.user.email : "log in to view"}</ListGroup.Item>
                         <ListGroup.Item>Website: {band.links}</ListGroup.Item>
                     </ListGroup>
                 </Col>

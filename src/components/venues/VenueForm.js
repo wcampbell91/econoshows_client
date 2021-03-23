@@ -3,11 +3,13 @@ import { createRef, useRef } from "react"
 import { Link } from "react-router-dom"
 import { Form, Col, Button } from "react-bootstrap"
 import { VenueContext } from "../venues/VenueProvider"
+import bsCustomFileInput from "bs-custom-file-input"
 
 const VenueForm = props => {
     const { getVenue, venue, updateVenue } = useContext(VenueContext)
     const [ isAllAges, setIsAllAges ] = useState(false)
     const [ hasBackline, setHasBackline ] = useState(false)
+    const fileInput = React.createRef()
     const [ currentVenue, setCurrentVenue ] = useState({
         username: "",
         email: "",
@@ -19,6 +21,7 @@ const VenueForm = props => {
         has_backline: "",
         description: "",
         booking_info: "",
+        photos: "",
         address: "",
     })
 
@@ -28,6 +31,7 @@ const VenueForm = props => {
     const { venueId } = props.match.params
 
     useEffect(() => {
+        bsCustomFileInput.init()
         getVenue(venueId) 
             .then((venue) => {
                 setCurrentVenue({
@@ -41,14 +45,27 @@ const VenueForm = props => {
                     has_backline: venue.has_backline,
                     description: venue.description,
                     booking_info: venue.booking_info,
+                    photos: venue.photos ? venue.photos : '',
                     address: venue.address,
                 })
             })
     }, [])
 
+    const getBase64 = (file, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => callback(reader.result));
+        reader.readAsDataURL(file);
+    }
+
     const handleChange = e => {
         const newVenueState = Object.assign({}, currentVenue)
-        newVenueState[e.target.name] = e.target.value
+        if (e.target.name !== "photos") {
+            newVenueState[e.target.name] = e.target.value
+        } else if (e.target.name === "photos") {
+            getBase64(fileInput.current.files[0], (base64ImageString) => {
+                newVenueState["photos"] = base64ImageString
+            })
+        }
         setCurrentVenue(newVenueState)
     }
 
@@ -112,6 +129,10 @@ const VenueForm = props => {
                         </Form.Group>                    
                     </Col>
                 </Form.Row>
+                <Form.Group controlId="photos" className="custom-file">
+                    <Form.Label>Upload Profile Photo</Form.Label>
+                    <Form.File type="file" className="custom-file-label" name="photos" ref={fileInput} id="inputGroupFile01" label="choose file..." onChange={handleChange} custom />
+                </Form.Group>
                 <Form.Group controlId="description">
                     <Form.Label>description</Form.Label>
                     <Form.Control defaultValue={currentVenue.description} as="textarea" rows={5} name="description" onChange={handleChange}/>
@@ -157,6 +178,7 @@ const VenueForm = props => {
                         has_backline: hasBackline,
                         description: currentVenue.description,
                         booking_info: currentVenue.booking_info,
+                        photos: currentVenue.photos,
                         address: currentVenue.address,
                     }
                     updateVenue(updatedVenue)

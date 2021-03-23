@@ -26,6 +26,7 @@ const SingleBand = props => {
             { authBandId === bandId ? <Button className="mr-auto" variant="primary" href={`/editBand/${bandId}`}>Update Profile</Button> : ""}
             <Row>
                 <Col>
+                    <img src={band.photos} alt="profile pic" className="col-12" />
                     <h3>{band.band_name}</h3>
                     <p>{band.bio}</p>
                     <ListGroup>

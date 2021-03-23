@@ -31,7 +31,7 @@ const SingleVenue = props => {
                     <p>{venue.description}</p>
                     <ListGroup>
                         <ListGroup.Item>Address: {venue.address}</ListGroup.Item>
-                        <ListGroup.Item>Booking Info: {venue.bookingInfo}</ListGroup.Item>
+                        <ListGroup.Item>Booking Info: {localStorage.getItem("token") ? venue.booking_info : "please log in to view"}</ListGroup.Item>
                         <ListGroup.Item>Website: {venue.website}</ListGroup.Item>
                         <ListGroup.Item>All Ages?  {venue && venue.is_all_ages ? "Yes" : "No"}</ListGroup.Item>
                         <ListGroup.Item>Backline? {venue && venue.has_backline ? "Yes" : "No"}</ListGroup.Item>

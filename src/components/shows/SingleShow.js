@@ -21,6 +21,7 @@ const SingleShow = props => {
         <Container>
             <Row>
                 <Col>
+                <img src={show.poster} alt="show poster" className="col-12" />
                     <h3>{show.title}</h3>
                     <p>{show.description}</p>
                     <ListGroup>

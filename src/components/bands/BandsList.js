@@ -17,7 +17,7 @@ const BandsList = props => {
                     {
                         bands ? bands.map((band) => {
                             return <Card>
-                                <Card.Img variant="top" src={band && band.photos ? band.photos : ""} />
+                                <Card.Img variant="top" src={band.photos} />
                                 <Card.Body>
                                     <Card.Title>{band.band_name}</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">{band && band.genre ? band.genre.name : ""} </Card.Subtitle>

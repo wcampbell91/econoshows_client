@@ -26,6 +26,7 @@ const SingleVenue = props => {
             {authVenueId === venueId ? <Button variant="primary" href={`/editVenue/${venueId}`}>Update Profile</Button> : ""}
             <Row>
                 <Col>
+                    <img src={venue.photos} alt="profile pic" className="col-12"/>
                     <h3>{venue.venue_name}</h3>
                     <p>{venue.description}</p>
                     <ListGroup>

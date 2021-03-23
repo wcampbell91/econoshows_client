@@ -4,12 +4,14 @@ import { Link } from "react-router-dom"
 import { Form, Col, Button } from "react-bootstrap"
 import { GenreContext } from "../GenreProvider"
 import { BandContext } from "../bands/BandProvider"
+import bsCustomFileInput from 'bs-custom-file-input'
 
 const BandForm = props => {
     const { getBand, band, updateBand } = useContext(BandContext)
     const { getGenres, genres } = useContext(GenreContext)
     const passwordDialog = React.createRef()
     const verifyPassword = React.createRef()
+    const fileInput = React.createRef()
 
     const [ currentBand, setCurrentBand ] = useState({
         username: "",
@@ -22,12 +24,14 @@ const BandForm = props => {
         genre: "", 
         lineup: "", 
         links: "", 
+        photos: "",
         bio: "" 
     })
 
     const { bandId } = props.match.params
 
     useEffect(() => {
+        bsCustomFileInput.init()
         getGenres()
         getBand(bandId)
             .then((band) => {
@@ -41,19 +45,31 @@ const BandForm = props => {
                     genre: band.genre, 
                     lineup: band.lineup, 
                     links: band.links, 
+                    photos: band.photos ? band.photos : "",
                     bio: band.bio
                 })
             })
     }, [])
+    
+
+    const getBase64 = (file, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => callback(reader.result));
+        reader.readAsDataURL(file);
+    }
 
 
     const handleChange = e => {        
         const newBandState = Object.assign({}, currentBand)
-        if (e.target.name !== "genre") {
+        if (e.target.name !== "genre" && e.target.name !== "photos") {
             newBandState[e.target.name] = e.target.value
-        } else {
+        } else if (e.target.name === "genre") {
             const genre = JSON.parse(e.target.value)
             newBandState["genre"] = genre
+        } else if (e.target.name === "photos") {
+            getBase64(fileInput.current.files[0], (base64ImageString) => {
+                newBandState['photos'] = base64ImageString
+            })
         }
         setCurrentBand(newBandState)
     }
@@ -141,10 +157,15 @@ const BandForm = props => {
                         </Form.Group>
                     </Col>
                 </Form.Row>
+                <Form.Group controlId="photos" className="custom-file">
+                    <Form.Label>Upload Profile Photo</Form.Label>
+                    <Form.File type="file" className="custom-file-label" name="photos" ref={fileInput} id="inputGroupFile01" label="choose file..." onChange={handleChange} custom />
+                </Form.Group>
                 <Form.Group controlId="bio">
                     <Form.Label>Bio</Form.Label>
                     <Form.Control defaultValue={currentBand.bio} as="textarea" rows={5} name="bio" onChange={handleChange}/>
                 </Form.Group>
+
 
                 <Button className="justify-content-center" variant="primary" onClick={e => {
                     e.preventDefault();
@@ -158,7 +179,7 @@ const BandForm = props => {
                             band_name: currentBand.band_name,
                             genre: currentBand.genre.id, 
                             lineup: currentBand.lineup, 
-                            // photos: "",
+                            photos: currentBand.photos,
                             links: currentBand.links, 
                             bio: currentBand.bio,
                             user_type: "band"

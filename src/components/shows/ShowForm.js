@@ -4,11 +4,13 @@ import { VenueContext } from "../venues/VenueProvider"
 import { BandContext } from "../bands/BandProvider"
 import OpenerComponent from "./OpenerComponent"
 import { Form, Container, Col, Button } from "react-bootstrap"
+import bsCustomFileInput from "bs-custom-file-input"
 
 const ShowForm = props => {
     const { createShow, getShow, show, updateShow } = useContext(ShowContext)
     const { getVenues, venues } = useContext(VenueContext)
     const { getBands, bands } = useContext(BandContext)
+    const fileInput = React.createRef()
 
     const [ currentShow, setCurrentShow ] = useState({
         author: "",
@@ -29,6 +31,7 @@ const ShowForm = props => {
     const { showId } = props.match.params
     
     useEffect(() => {
+        bsCustomFileInput.init()
         getVenues()
         getBands()
         if (showId) {
@@ -51,13 +54,19 @@ const ShowForm = props => {
     }, [])
 
 
+    const getBase64 = (file, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => callback(reader.result));
+        reader.readAsDataURL(file);
+    }
+
 
     const handleChange = e => {
         e.preventDefault();
         
         const newShowState = Object.assign({}, currentShow)
         const checkedBands = []
-        if(e.target.name !== "bands" && e.target.name !== "venue") {
+        if(e.target.name !== "bands" && e.target.name !== "venue" && e.target.name !== "poster") {
             newShowState[e.target.name] = e.target.value
         } else if (e.target.name === "bands") {
             const checkeds = document.getElementsByName("bands")
@@ -73,6 +82,10 @@ const ShowForm = props => {
         } else if (e.target.name === "venue") {
             const newVenue = JSON.parse(e.target.value)
             newShowState["venue"] = newVenue
+        } else if (e.target.name === "poster") {
+            getBase64(fileInput.current.files[0], (base64ImageString) => {
+                newShowState["poster"] = base64ImageString
+            })
         }
         setCurrentShow(newShowState)
     }
@@ -114,6 +127,10 @@ const ShowForm = props => {
                         </Form.Group>
                     </Col>
                 </Form.Row>
+                <Form.Group controlId="poster" className="custom-file">
+                    <Form.Label>Upload Show Poster</Form.Label>
+                    <Form.File type="file" className="custom-file-label" name="poster" ref={fileInput} id="inputGroupFile01" label="choose file..." onChange={handleChange} custom />
+                </Form.Group>
                 <Form.Group>
                     <Form.Label>Venue</Form.Label>
                     <Form.Control name="venue" as="select" selected={currentShow.venue.id} onChange={handleChange}>
@@ -187,7 +204,7 @@ const ShowForm = props => {
                             show_time: currentShow.show_time,
                             cover: currentShow.cover,
                             date: currentShow.date,
-                            // poster: "",
+                            poster: currentShow.poster,
                             venue: currentShow.venue.id,
                             bands: newBands
                         }
@@ -207,7 +224,7 @@ const ShowForm = props => {
                             show_time: currentShow.show_time,
                             cover: currentShow.cover,
                             date: currentShow.date,
-                            // poster: "",
+                            poster: currentShow.poster,
                             venue: currentShow.venue.id,
                             bands: newBands
                         }

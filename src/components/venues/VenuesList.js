@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { Container, Card, CardDeck } from "react-bootstrap"
+import { Container, Card, CardDeck, CardColumns } from "react-bootstrap"
 import { VenueContext } from "./VenueProvider"
 
 const VenuesList = props => {
@@ -12,7 +12,8 @@ const VenuesList = props => {
 
     return (
         <Container>
-            <CardDeck>
+            <h3 style={{textAlign: "center"}} className="mb-3">Venues</h3>
+            <CardColumns>
                 {
                     venues ? venues.map((venue) => {
                         return <Card>
@@ -25,7 +26,7 @@ const VenuesList = props => {
                     })
                     : ""
                 }
-            </CardDeck>
+            </CardColumns>
         </Container>
     )
 }

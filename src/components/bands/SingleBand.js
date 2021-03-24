@@ -25,10 +25,10 @@ const SingleBand = props => {
         <Container className="justify-content-center">
             { authBandId === bandId ? <Button className="mr-auto" variant="primary" href={`/editBand/${bandId}`}>Update Profile</Button> : ""}
             <Row>
-                <Col>
-                    <img src={band.photos} alt="profile pic" className="col-12" />
-                    <h3>{band.band_name}</h3>
-                    <p>{band.bio}</p>
+                <Col className="md-col-4">
+                    <h4 className="mb-2" style={{textAlign: "center"}}>{band.band_name}</h4>
+                    <img className="mb-2 col-12" src={band.photos} alt="profile pic" />
+                    <p className="mt-2" style={{}}>{band.bio}</p>
                     <ListGroup>
                         <ListGroup.Item>Lineup: {band.lineup}</ListGroup.Item>
                         <ListGroup.Item>Genre: {band && band.genre ? band.genre.name : ''}</ListGroup.Item>
@@ -36,11 +36,9 @@ const SingleBand = props => {
                         <ListGroup.Item>Website: {band.links}</ListGroup.Item>
                     </ListGroup>
                 </Col>
-                <Col>
+                <Col className="md-col-8">
                     <h4 style={{textAlign: "center"}}>Shows</h4>
-                    <CardDeck>
-                        {bandShowCards}
-                    </CardDeck>
+                    {bandShowCards}
                     { authBandId === bandId ? <Button className="mt-2" style={{textAlign: "center"}} variant="primary" href="/addShow">Add A Show</Button> : ""}
                 </Col>
             </Row>

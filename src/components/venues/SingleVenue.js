@@ -39,9 +39,7 @@ const SingleVenue = props => {
                 </Col>
                 <Col>
                     <h4 style={{textAlign: "center"}}>Shows</h4>
-                    <CardDeck>
                         {venueShowCards}
-                    </CardDeck>
                     {authVenueId === venueId ? <Button variant="primary" href="/addShow">Add Show</Button> : ""}
                 </Col>
             </Row>

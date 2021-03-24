@@ -1,0 +1,16 @@
+.landscapeHomeCard {
+    max-height: 300px;
+    .landscapeHomeImg {
+        object-fit: cover;
+        object-position: center top;
+        max-height: 300px;
+    }
+}
+.landscapeShowCard {
+    max-height: 150px;
+    .landscapeShowImg {
+        object-fit: cover;
+        object-position: center top;
+        max-height: 150px;
+    }
+}

@@ -1,17 +1,24 @@
 import React from "react"
-import { Card } from "react-bootstrap"
+import { Card, Row, Col } from "react-bootstrap"
 
 const BandShows = props => {
     const { show } = props  
 
     return (
-            <Card>
-                <Card.Img variant="top" src={show && show.poster ? show.poster : ''} />
-                <Card.Body>
-                    <Card.Title>{show ? show.title : ""}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">{show ? show.date : ''}</Card.Subtitle>
-                    {show && show.venue ? <Card.Text>{show.venue.venue_name}</Card.Text> : ''}
-                </Card.Body>
+            <Card className="mb-2">
+                <Row className="no-gutters landscapeShowCard">
+                    <Col>
+                        <Card.Img className="landscapeShowImg" variant="top" src={show && show.poster ? show.poster : ''} />
+                    </Col>
+                    <Col>
+                        <Card.Body>
+                            <Card.Title>{show ? show.title : ""}</Card.Title>
+                            <Card.Subtitle className="mb-2 text-muted">{show ? show.date : ''}</Card.Subtitle>
+                            {show && show.venue ? <Card.Text>{show.venue.venue_name}</Card.Text> : ''}
+                            <Card.Link href={`/shows/${show.id}`}>More Info</Card.Link>
+                        </Card.Body>
+                    </Col>
+                </Row>
             </Card>
     )
 }

@@ -59,7 +59,7 @@ const VenueForm = props => {
 
     const handleChange = e => {
         const newVenueState = Object.assign({}, currentVenue)
-        if (e.target.name !== "photos") {
+        if (e.target.name !== "photos" && e.target.name !== "allAges" && e.target.name !== "backline") {
             newVenueState[e.target.name] = e.target.value
         } else if (e.target.name === "photos") {
             getBase64(fileInput.current.files[0], (base64ImageString) => {

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { Container, Card, CardDeck } from "react-bootstrap"
+import { Container, Card, CardDeck, CardColumns } from "react-bootstrap"
 import { BandContext } from "./BandProvider"
 
 const BandsList = props => {
@@ -13,7 +13,8 @@ const BandsList = props => {
 
     return (
         <Container>
-                <CardDeck>
+            <h3 className="mb-3" style={{textAlign: "center"}}>Bands</h3>
+                <CardColumns>
                     {
                         bands ? bands.map((band) => {
                             return <Card>
@@ -27,7 +28,7 @@ const BandsList = props => {
                         })
                         : ''
                     }
-                </CardDeck>
+                </CardColumns>
         </Container>
     )
 

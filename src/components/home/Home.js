@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import {Container, Card} from "react-bootstrap"
+import {Container, Card, Row, Col} from "react-bootstrap"
 import  { ShowContext } from "../shows/ShowProvider"
+import "../styles/landscapeCard.scss"
 
 
 const Home = props => {
@@ -15,13 +16,19 @@ const Home = props => {
         <Container>
             {shows ? shows.map((show) => {
                 return <Card className="mb-3">
-                            <Card.Img variant="top" src={show && show.poster ? show.poster : ''} />
-                            <Card.Body>
-                                <Card.Title>{show.title}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{show.date}</Card.Subtitle>
-                                <Card.Text>{show && show.venue ? show.venue.venue_name : ''}</Card.Text>
-                                <Card.Link href={`/shows/${show.id}`}>More Info</Card.Link>
-                            </Card.Body>
+                            <Row className="no-gutters landscapeHomeCard">
+                                <Col className="md-col-4">
+                                    <Card.Img className="landscapeHomeImg" variant="top" src={show && show.poster ? show.poster : ''} />
+                                </Col>
+                                <Col className="md-col-8">
+                                    <Card.Body>
+                                        <Card.Title>{show.title}</Card.Title>
+                                        <Card.Subtitle className="mb-2 text-muted">{show.date}</Card.Subtitle>
+                                        <Card.Text>{show && show.venue ? show.venue.venue_name : ''}</Card.Text>
+                                        <Card.Link href={`/shows/${show.id}`}>More Info</Card.Link>
+                                    </Card.Body>
+                                </Col>
+                            </Row>
                         </Card>
             })
             : ''}

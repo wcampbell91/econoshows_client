@@ -35,9 +35,7 @@ const SingleShow = props => {
                     </ListGroup>
                 </Col>
                 <Col>
-                    <CardDeck>
-                        {showBandCards}
-                    </CardDeck>
+                    {showBandCards}
                 </Col>
             </Row>
             { show && show.author && (userId === show.author.id ) ? <Button className="text-center mt-2" variant="primary" href={`/editShow/${show.id}`}>Update Show</Button> : ""}

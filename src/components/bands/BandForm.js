@@ -167,7 +167,7 @@ const BandForm = props => {
                 </Form.Group>
 
 
-                <Button className="justify-content-center" variant="primary" onClick={e => {
+                <Button className="justify-content-center primaryButton" variant="primary" onClick={e => {
                     e.preventDefault();
                         const updatedBand = {
                             id: parseInt(bandId),

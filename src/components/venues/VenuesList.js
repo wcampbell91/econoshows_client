@@ -16,10 +16,10 @@ const VenuesList = props => {
             <CardColumns>
                 {
                     venues ? venues.map((venue) => {
-                        return <Card>
+                        return <Card className="card">
                             <Card.Img variant="top" src={venue && venue.photos ? venue.photos : ''} />
                             <Card.Body>
-                                <Card.Title>{venue.venue_name}</Card.Title>
+                                <Card.Title className="card-title">{venue.venue_name}</Card.Title>
                                 <Card.Link href={`/venues/${venue.id}`}>More Info</Card.Link>
                             </Card.Body>
                         </Card>

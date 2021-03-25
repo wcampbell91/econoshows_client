@@ -5,14 +5,14 @@ const ShowBands = props => {
     const { band } = props
 
     return (
-        <Card className="mb-2">
+        <Card className="mb-2 card">
             <Row className="no-gutters landscapeShowCard">
                 <Col>
                     <Card.Img className="landscapeShowImg" variant="top" src={band && band.photos ? band.photos : ''} />
                 </Col>
                 <Col>
                     <Card.Body>
-                        <Card.Title>{band.band_name}</Card.Title>
+                        <Card.Title className="card-title">{band.band_name}</Card.Title>
                         <Card.Link href={`/bands/${band.id}`}>More Info</Card.Link>
                     </Card.Body>
                 </Col>

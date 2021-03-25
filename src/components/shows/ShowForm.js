@@ -189,7 +189,7 @@ const ShowForm = props => {
                 </Form.Row>
                 {
                     ("showId" in props.match.params)
-                    ? <Button className="justify-content-center" variant="primary" onClick={e => {
+                    ? <Button className="justify-content-center primaryButton" variant="primary" onClick={e => {
                         e.preventDefault();
 
                         const newBands = currentShow.bands.map((band) => band.id)
@@ -211,7 +211,7 @@ const ShowForm = props => {
                         updateShow(updatedShow)
                         .then(() => props.history.push(`/shows/${showId}`))
                     }}>Update Show</Button>
-                    : <Button variant="primary" onClick={e => {
+                    : <Button variant="primary" className="primaryButton" onClick={e => {
                         e.preventDefault();
 
                         const newBands = currentShow.bands.map((band) => band.id)

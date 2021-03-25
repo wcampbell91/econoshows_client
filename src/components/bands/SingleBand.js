@@ -23,13 +23,12 @@ const SingleBand = props => {
 
     return(
         <Container className="justify-content-center">
-            { authBandId === bandId ? <Button className="mr-auto" variant="primary" href={`/editBand/${bandId}`}>Update Profile</Button> : ""}
             <Row>
                 <Col className="md-col-4">
                     <h4 className="mb-2" style={{textAlign: "center"}}>{band.band_name}</h4>
                     <img className="mb-2 col-12" src={band.photos} alt="profile pic" />
                     <p className="mt-2" style={{}}>{band.bio}</p>
-                    <ListGroup>
+                    <ListGroup className="listgroup">
                         <ListGroup.Item>Lineup: {band.lineup}</ListGroup.Item>
                         <ListGroup.Item>Genre: {band && band.genre ? band.genre.name : ''}</ListGroup.Item>
                         <ListGroup.Item>Contact: {localStorage.getItem("token") && band.user ? band.user.email : "log in to view"}</ListGroup.Item>
@@ -39,10 +38,11 @@ const SingleBand = props => {
                 <Col className="md-col-8">
                     <h4 style={{textAlign: "center"}}>Shows</h4>
                     {bandShowCards}
-                    { authBandId === bandId ? <Button className="mt-2" style={{textAlign: "center"}} variant="primary" href="/addShow">Add A Show</Button> : ""}
+                    { authBandId === bandId ? <Button className="mt-2 primaryButton" style={{textAlign: "center"}} variant="primary" href="/addShow">Add A Show</Button> : ""}
                 </Col>
             </Row>
-            { authBandId === bandId ? <Button variant="danger" href={`/deleteBand/${bandId}`}>Delete Account</Button> : ""}
+            { authBandId === bandId ? <Button variant="danger" className="mt-4 mr-2 offset-5 dangerButton" href={`/deleteBand/${bandId}`}>Delete Account</Button> : ""}
+            { authBandId === bandId ? <Button className="mt-4 primaryButton" variant="primary" href={`/editBand/${bandId}`}>Update Profile</Button> : ""}
         </Container>
     )
 }

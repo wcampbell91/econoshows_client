@@ -22,9 +22,9 @@ const SingleShow = props => {
             <Row>
                 <Col>
                 <img src={show.poster} alt="show poster" className="col-12" />
-                    <h3>{show.title}</h3>
+                    <h3 className="mt-2">{show.title}</h3>
                     <p>{show.description}</p>
-                    <ListGroup>
+                    <ListGroup className="listgroup">
                         <ListGroup.Item>When: {show.date}</ListGroup.Item>
                         {show && show.venue ?  <ListGroup.Item>Venue: {show.venue.venue_name}</ListGroup.Item> : ''}
                         <ListGroup.Item>Doors @ {show.door_time}</ListGroup.Item>
@@ -38,9 +38,8 @@ const SingleShow = props => {
                     {showBandCards}
                 </Col>
             </Row>
-            { show && show.author && (userId === show.author.id ) ? <Button className="text-center mt-2" variant="primary" href={`/editShow/${show.id}`}>Update Show</Button> : ""}
-            { show && show.author && (userId === show.author.id ) ? <Button variant="danger mt-2 ml-2" href={`/deleteShow/${showId}`}>Delete Show</Button> : ""}
-
+            { show && show.author && (userId === show.author.id ) ? <Button className="mt-4 offset-5 mr-2 primaryButton" variant="primary" href={`/editShow/${show.id}`}>Update Show</Button> : ""}
+            { show && show.author && (userId === show.author.id ) ? <Button className="mt-4 dangerButton" variant="danger" href={`/deleteShow/${showId}`}>Delete Show</Button> : ""}
         </Container>
     )
 }

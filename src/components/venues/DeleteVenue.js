@@ -10,7 +10,7 @@ const DeleteVenue = props => {
     return (
         <div className="container justify-content-center">
             <h3 className="text-center">Are you sure you want to delete your profile?</h3>
-            <Button variant="danger" onClick={e => {
+            <Button variant="danger" className="dangerButton" onClick={e => {
                 deleteVenue(venueId)
                 .then(() => {
                     localStorage.removeItem("token")

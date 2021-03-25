@@ -14,15 +14,16 @@ const Home = props => {
 
     return (
         <Container>
+            <h1 className="text-center">EconoShows</h1>
             {shows ? shows.map((show) => {
-                return <Card className="mb-3">
+                return <Card className="mb-3 card">
                             <Row className="no-gutters landscapeHomeCard">
                                 <Col className="md-col-4">
                                     <Card.Img className="landscapeHomeImg" variant="top" src={show && show.poster ? show.poster : ''} />
                                 </Col>
                                 <Col className="md-col-8">
                                     <Card.Body>
-                                        <Card.Title>{show.title}</Card.Title>
+                                        <Card.Title className="card-title">{show.title}</Card.Title>
                                         <Card.Subtitle className="mb-2 text-muted">{show.date}</Card.Subtitle>
                                         <Card.Text>{show && show.venue ? show.venue.venue_name : ''}</Card.Text>
                                         <Card.Link href={`/shows/${show.id}`}>More Info</Card.Link>

@@ -42,7 +42,7 @@ const Login = props => {
 
             <dialog className="dialog dialog--auth" ref={invalidDialog}>
                 <div>Email or password was not valid.</div>
-                <Button variant="danger" onClick={e => invalidDialog.current.close()}>Close</Button>
+                <Button variant="danger" className="dangerButton" onClick={e => invalidDialog.current.close()}>Close</Button>
             </dialog>
 
             <Form className="col-6 offset-3" onSubmit={handleLogin}>

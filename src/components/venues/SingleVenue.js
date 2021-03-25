@@ -23,13 +23,12 @@ const SingleVenue = props => {
     
     return(
         <Container>
-            {authVenueId === venueId ? <Button variant="primary" href={`/editVenue/${venueId}`}>Update Profile</Button> : ""}
             <Row>
                 <Col>
                     <img src={venue.photos} alt="profile pic" className="col-12"/>
-                    <h3>{venue.venue_name}</h3>
+                    <h3 className="mt-2">{venue.venue_name}</h3>
                     <p>{venue.description}</p>
-                    <ListGroup>
+                    <ListGroup className="listgroup">
                         <ListGroup.Item>Address: {venue.address}</ListGroup.Item>
                         <ListGroup.Item>Booking Info: {localStorage.getItem("token") ? venue.booking_info : "please log in to view"}</ListGroup.Item>
                         <ListGroup.Item>Website: {venue.website}</ListGroup.Item>
@@ -40,10 +39,11 @@ const SingleVenue = props => {
                 <Col>
                     <h4 style={{textAlign: "center"}}>Shows</h4>
                         {venueShowCards}
-                    {authVenueId === venueId ? <Button variant="primary" href="/addShow">Add Show</Button> : ""}
+                    {authVenueId === venueId ? <Button className="mt-2 primaryButton" variant="primary" href="/addShow">Add Show</Button> : ""}
                 </Col>
             </Row>
-            { authVenueId === venueId ? <Button variant="danger" href={`/deleteVenue/${venueId}`}>Delete Account</Button> : ""}
+            { authVenueId === venueId ? <Button className="mt-4 offset-5 mr-2 dangerButton" variant="danger" href={`/deleteVenue/${venueId}`}>Delete Account</Button> : ""}
+            {authVenueId === venueId ? <Button className="mt-4 primaryButton" variant="primary" href={`/editVenue/${venueId}`}>Update Profile</Button> : ""}
         </Container>
     )
 }

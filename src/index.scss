@@ -1,8 +1,49 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;700&display=swap');
+
+
 
 
 body { 
     padding: 0;
     margin: 0;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    background-color: #28262C;
+    color: #F9F5FF
+}
+
+h3, h4 {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+}
+
+.card-title {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+}
+
+.card {
+    color: #28262C;
+    background-color: #f7fff7
+}
+
+.listgroup {
+    color: #28262C;
+    background-color: #f7fff7
+}
+
+.Navbar {
+    background-color: #455a64;
+}
+
+.primaryButton {
+    background-color: #28556f;
+    border: 0
+}
+
+.dangerButton {
+    background-color: #B43A42;
+    border: 0
 }

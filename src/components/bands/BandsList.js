@@ -17,10 +17,10 @@ const BandsList = props => {
                 <CardColumns>
                     {
                         bands ? bands.map((band) => {
-                            return <Card>
+                            return <Card className="card">
                                 <Card.Img variant="top" src={band.photos} />
                                 <Card.Body>
-                                    <Card.Title>{band.band_name}</Card.Title>
+                                    <Card.Title className="card-title">{band.band_name}</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">{band && band.genre ? band.genre.name : ""} </Card.Subtitle>
                                     <Card.Link href={`/bands/${band.id}`}>More Info</Card.Link>
                                 </Card.Body>

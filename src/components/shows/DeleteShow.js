@@ -10,7 +10,7 @@ const DeleteShow = props => {
     return (
         <div className="container justify-content-center">
             <h3 className="text-center">Are you sure you want to delete this show?</h3>
-            <Button variant="danger" onClick={e => {
+            <Button variant="danger"  className="dangerButton" onClick={e => {
                 deleteShow(showId)
                 .then(() => {
                     props.history.push('/shows')

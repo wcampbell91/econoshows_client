@@ -1,5 +1,4 @@
 import React from 'react'
-import "./NavBar.scss"
 import { Navbar, Nav, Button } from "react-bootstrap"
 // import { BandContext } from "../bands/BandProvider"
 // import { VenueContext } from "../venues/VenueProvider"

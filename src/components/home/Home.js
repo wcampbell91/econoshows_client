@@ -4,7 +4,7 @@ import {Container, Card, Row, Col} from "react-bootstrap"
 import  { ShowContext } from "../shows/ShowProvider"
 import HomeCards from "./HomeCards"
 import Search from "./Search"
-import "../styles/landscapeCard.scss"
+import "../styles/landscapeCard.css"
 import { BandContext } from "../bands/BandProvider"
 
 

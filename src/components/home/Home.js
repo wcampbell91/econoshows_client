@@ -9,33 +9,26 @@ import { BandContext } from "../bands/BandProvider"
 
 
 const Home = props => {
-    const { shows, getShows } = useContext(ShowContext)
-    
-    useEffect(() => {
-        getShows()
-    }, [])
+    const { shows } = useContext(ShowContext)
+    const { bands } = useContext(BandContext)
+    const [ search, setSearch ] = useState('')
+
+    const dynamicSearch = () => shows.filter(show => {
+        if (show.bands.some(band => band.band_name.toLowerCase().includes(search.toLowerCase()))) {
+            return true
+        } else if (show.venue.venue_name.toLowerCase().includes(search.toLowerCase())) {
+            return true
+        } else {
+            return false
+        }
+    })
+
 
     return (
         <Container>
             <h1 className="text-center">EconoShows</h1>
-            {shows ? shows.map((show) => {
-                return <Card className="mb-3 card">
-                            <Row className="no-gutters landscapeHomeCard">
-                                <Col className="md-col-4">
-                                    <Card.Img className="landscapeHomeImg" variant="top" src={show && show.poster ? show.poster : ''} />
-                                </Col>
-                                <Col className="md-col-8">
-                                    <Card.Body>
-                                        <Card.Title className="card-title">{show.title}</Card.Title>
-                                        <Card.Subtitle className="mb-2 text-muted">{show.date}</Card.Subtitle>
-                                        <Card.Text>{show && show.venue ? show.venue.venue_name : ''}</Card.Text>
-                                        <Card.Link href={`/shows/${show.id}`}>More Info</Card.Link>
-                                    </Card.Body>
-                                </Col>
-                            </Row>
-                        </Card>
-            })
-            : ''}
+            <Search setSearch={setSearch} />
+            <HomeCards shows={dynamicSearch()} />
         </Container>
     )
 

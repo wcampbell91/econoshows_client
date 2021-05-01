@@ -17,6 +17,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-search-field": "^1.2.1",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
@@ -44,6 +45,6 @@
   },
   "devDependencies": {
     "node-sass": "^5.0.0",
-    "sass": "^1.32.8"
+    "sass": "^1.32.12"
   }
 }

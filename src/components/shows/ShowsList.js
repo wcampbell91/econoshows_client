@@ -1,38 +1,31 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import  { ShowContext } from "./ShowProvider"
 import { Container, Card, Button, Row, Col } from "react-bootstrap"
+import ShowCards from "./ShowCards"
+import Search from "../home/Search"
 
 const ShowsList = props => {
-    const { shows, getShows } = useContext(ShowContext)
+    const { shows } = useContext(ShowContext)
+    const [ search, setSearch ] = useState('')
 
-    useEffect(() => {
-        getShows()
-    }, [])
-
+    const dynamicSearch = () => shows.filter(show => {
+        if (show.bands.some(band => band.band_name.toLowerCase().includes(search.toLowerCase()))) {
+            return true
+        } else if (show.venue.venue_name.toLowerCase().includes(search.toLowerCase())) {
+            return true
+        } else {
+            return false
+        }
+    })
+    
     return(
         <Container className="justify-content-center">
             <h3 className="mb-3" style={{textAlign: "center"}}>Upcoming Jams</h3>
             {(localStorage.getItem("token") !== null) 
-            ? <Button variant="primary" className="mb-2 primaryButton" style={{textAlign: "center"}}href="/addShow">Add Show</Button>
+            ? <Button variant="primary" className="ml-3 mb-2 primaryButton" style={{textAlign: "center"}}href="/addShow">Add Show</Button>
             : ""}
-                {shows ? shows.map((show) => {
-                    return <Card key={show.id} className="mb-2 card">
-                                <Row className="landscapeHomeCard">
-                                    <Col>
-                                        <Card.Img className="landscapeHomeImg" variant="top" src={show && show.poster ? show.poster : ''} />
-                                    </Col>
-                                    <Col>
-                                        <Card.Body>
-                                            <Card.Title className="card-title">{show.title}</Card.Title>
-                                            <Card.Subtitle className="mb-2 text-muted">{show.date}</Card.Subtitle>
-                                            <Card.Text>{show && show.venue ? show.venue.venue_name : ''}</Card.Text>
-                                            <Card.Link href={`/shows/${show.id}`}>More Info</Card.Link>
-                                        </Card.Body>
-                                    </Col>
-                                </Row>
-                            </Card>
-                })
-                : ''}
+            <Search setSearch={setSearch} />
+            <ShowCards shows={dynamicSearch()} />
         </Container>
     )
 }

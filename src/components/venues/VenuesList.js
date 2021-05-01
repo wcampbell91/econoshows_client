@@ -1,32 +1,20 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Container, Card, CardDeck, CardColumns } from "react-bootstrap"
 import { VenueContext } from "./VenueProvider"
+import Search from "../home/Search"
+import VenueCards from "./VenueCards"
 
 const VenuesList = props => {
-    const { venues, getVenues } = useContext(VenueContext)
+    const { venues } = useContext(VenueContext)
+    const [ search, setSearch ] = useState('')
 
-    useEffect(() => {
-        getVenues()
-        console.log(venues)
-    }, [])
-
+    const dynamicSearch = () => venues && venues.filter((venue) => venue.venue_name.toLowerCase().includes(search.toLowerCase()))
+    
     return (
         <Container>
             <h3 style={{textAlign: "center"}} className="mb-3">Venues</h3>
-            <CardColumns>
-                {
-                    venues ? venues.map((venue) => {
-                        return <Card className="card">
-                            <Card.Img variant="top" src={venue && venue.photos ? venue.photos : ''} />
-                            <Card.Body>
-                                <Card.Title className="card-title">{venue.venue_name}</Card.Title>
-                                <Card.Link href={`/venues/${venue.id}`}>More Info</Card.Link>
-                            </Card.Body>
-                        </Card>
-                    })
-                    : ""
-                }
-            </CardColumns>
+            <Search setSearch={setSearch} />
+            <VenueCards venues={dynamicSearch()} />
         </Container>
     )
 }

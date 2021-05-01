@@ -11,7 +11,7 @@ const VenueProvider = props => {
     }, [])
 
     const getVenue = id => {
-        return fetch(`http://localhost:8000/venues/${id}`, {
+        return fetch(`https://econoshows-api.herokuapp.com/venues/${id}`, {
         })
         .then(res => res.json())
         .then(res => {
@@ -21,7 +21,7 @@ const VenueProvider = props => {
     }
 
     const getVenues = () => {
-        return new Promise((resolve, reject) => fetch("http://localhost:8000/venues")
+        return new Promise((resolve, reject) => fetch("https://econoshows-api.herokuapp.com/venues")
             .then(res => {
                 res.json().then(res => {
                 setVenues(res)
@@ -31,7 +31,7 @@ const VenueProvider = props => {
     )}
 
     const registerVenue = venue => {
-        return fetch("http://localhost:8000/register_venue", {
+        return fetch("https://econoshows-api.herokuapp.com/register_venue", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const VenueProvider = props => {
     }
 
     const updateVenue = venue => {
-        return fetch(`http://localhost:8000/venues/${venue.id}`, {
+        return fetch(`https://econoshows-api.herokuapp.com/venues/${venue.id}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("token")}`,
@@ -54,7 +54,7 @@ const VenueProvider = props => {
     }
 
     const deleteVenue = id => {
-        return fetch(`http://localhost:8000/venues/${id}`, {
+        return fetch(`https://econoshows-api.herokuapp.com/venues/${id}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("token")}`

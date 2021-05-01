@@ -6,15 +6,8 @@ import Search from "../home/Search"
 import BandCards from "./BandCards"
 
 const BandsList = props => {
-    const { getBands, bands } = useContext(BandContext)
-    // const [ bands, setBands ] = useState([])
+    const { bands } = useContext(BandContext)
     const [ search, setSearch ] = useState('')
-
-    useEffect(() => {
-        getBands()
-        // .then(bandsList => setBands(bandsList))
-    }, [])
-
 
     const dynamicSearch = () => bands && bands.filter((band) => band.band_name.toLowerCase().includes(search.toLowerCase()))
 

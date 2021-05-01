@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 export const ShowContext = React.createContext()
 
@@ -6,11 +6,19 @@ const ShowProvider = props => {
     const [ show, setShow ] = useState({})
     const [ shows, setShows ] = useState([])
 
+    useEffect(() => {
+        getShows()
+    }, [])
+
     const getShows = () => {
-        return fetch("http://localhost:8000/shows")
-                    .then(res => res.json())
-                    .then(setShows)
-    }
+        return new Promise((resolve, reject) => fetch("http://localhost:8000/shows")
+        .then(res => {
+            res.json().then(res => {
+            setShows(res)
+            resolve(res)
+        }).catch(err => reject(err))
+    }).catch(err => reject(err))
+)}
 
     const getShow = id => {
         return fetch(`http://localhost:8000/shows/${id}`)

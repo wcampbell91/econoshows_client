@@ -2,7 +2,10 @@ import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import {Container, Card, Row, Col} from "react-bootstrap"
 import  { ShowContext } from "../shows/ShowProvider"
-import "../styles/landscapeCard.scss"
+import HomeCards from "./HomeCards"
+import Search from "./Search"
+import "../styles/landscapeCard.css"
+import { BandContext } from "../bands/BandProvider"
 
 
 const Home = props => {

@@ -60,6 +60,7 @@ const BandProvider = props => {
         <BandContext.Provider value ={{
             band,
             bands,
+            setBands,
             getBand,
             getBands,
             registerBand,

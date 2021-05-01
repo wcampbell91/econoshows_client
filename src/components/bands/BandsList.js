@@ -1,34 +1,28 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Container, Card, CardDeck, CardColumns } from "react-bootstrap"
+import SearchField from "react-search-field"
 import { BandContext } from "./BandProvider"
+import Search from "../home/Search"
+import BandCards from "./BandCards"
 
 const BandsList = props => {
-    const { bands, getBands } = useContext(BandContext)
+    const { getBands, bands } = useContext(BandContext)
+    // const [ bands, setBands ] = useState([])
+    const [ search, setSearch ] = useState('')
 
     useEffect(() => {
         getBands()
+        // .then(bandsList => setBands(bandsList))
     }, [])
 
-    
+
+    const dynamicSearch = () => bands && bands.filter((band) => band.band_name.toLowerCase().includes(search.toLowerCase()))
 
     return (
         <Container>
             <h3 className="mb-3" style={{textAlign: "center"}}>Bands</h3>
-                <CardColumns>
-                    {
-                        bands ? bands.map((band) => {
-                            return <Card className="card">
-                                <Card.Img variant="top" src={band.photos} />
-                                <Card.Body>
-                                    <Card.Title className="card-title">{band.band_name}</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">{band && band.genre ? band.genre.name : ""} </Card.Subtitle>
-                                    <Card.Link href={`/bands/${band.id}`}>More Info</Card.Link>
-                                </Card.Body>
-                            </Card>
-                        })
-                        : ''
-                    }
-                </CardColumns>
+            <Search setSearch={setSearch}/>
+            <BandCards bands={dynamicSearch()}/>
         </Container>
     )
 

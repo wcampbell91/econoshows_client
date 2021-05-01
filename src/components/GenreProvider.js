@@ -6,7 +6,7 @@ const GenreProvider = props => {
     const [genres, setGenres] = useState([])
 
     const getGenres = () => {
-        return fetch("http://localhost:8000/genres")
+        return fetch("https://econoshows-api.herokuapp.com/genres")
         .then(res => res.json())
         .then(setGenres)
     }

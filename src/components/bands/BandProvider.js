@@ -11,7 +11,7 @@ const BandProvider = props => {
     }, [])
 
     const getBand = (bandId) => {
-        return fetch(`http://localhost:8000/bands/${bandId}`, {
+        return fetch(`https://econoshows-api.herokuapp.com/bands/${bandId}`, {
         })
         .then(res => res.json())
         .then((res) => {
@@ -21,7 +21,7 @@ const BandProvider = props => {
     }
 
     const getBands = () => {
-        return new Promise((resolve, reject) => fetch("http://localhost:8000/bands")
+        return new Promise((resolve, reject) => fetch("https://econoshows-api.herokuapp.com/bands")
             .then(res => {
                 res.json().then(res => {
                 setBands(res)
@@ -31,7 +31,7 @@ const BandProvider = props => {
     )}
 
     const registerBand = band => {
-        return fetch("http://localhost:8000/register_band", {
+        return fetch("https://econoshows-api.herokuapp.com/register_band", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const BandProvider = props => {
     }
 
     const updateBand = band => {
-        return fetch(`http://localhost:8000/bands/${band.id}`, {
+        return fetch(`https://econoshows-api.herokuapp.com/bands/${band.id}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("token")}`,
@@ -53,7 +53,7 @@ const BandProvider = props => {
     }
 
     const deleteBand = id => {
-        return fetch(`http://localhost:8000/bands/${id}`, {
+        return fetch(`https://econoshows-api.herokuapp.com/bands/${id}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("token")}`

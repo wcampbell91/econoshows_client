@@ -11,7 +11,7 @@ const Login = props => {
     const handleLogin = (e) => {
         e.preventDefault();
         
-        return fetch("http://localhost:8000/login", {
+        return fetch("https://econoshows-api.herokuapp.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

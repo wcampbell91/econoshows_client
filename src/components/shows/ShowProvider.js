@@ -11,7 +11,7 @@ const ShowProvider = props => {
     }, [])
 
     const getShows = () => {
-        return new Promise((resolve, reject) => fetch("http://localhost:8000/shows")
+        return new Promise((resolve, reject) => fetch("https://econoshows-api.herokuapp.com/shows")
         .then(res => {
             res.json().then(res => {
             setShows(res)
@@ -21,7 +21,7 @@ const ShowProvider = props => {
 )}
 
     const getShow = id => {
-        return fetch(`http://localhost:8000/shows/${id}`)
+        return fetch(`https://econoshows-api.herokuapp.com/shows/${id}`)
                     .then(res => res.json())
                     .then((res) => {
                         setShow(res)
@@ -30,7 +30,7 @@ const ShowProvider = props => {
     }
 
     const createShow = show => {
-        return fetch("http://localhost:8000/shows", {
+        return fetch("https://econoshows-api.herokuapp.com/shows", {
             method: "POST",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("token")}`,
@@ -45,7 +45,7 @@ const ShowProvider = props => {
 
     const updateShow = show => {
         console.log(show)
-        return fetch(`http://localhost:8000/shows/${show.id}`, {
+        return fetch(`https://econoshows-api.herokuapp.com/shows/${show.id}`, {
             method: "PUT",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("token")}`,
@@ -56,7 +56,7 @@ const ShowProvider = props => {
     }
 
     const deleteShow = id => {
-        return fetch(`http://localhost:8000/shows/${id}`, {
+        return fetch(`https://econoshows-api.herokuapp.com/shows/${id}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("token")}`
